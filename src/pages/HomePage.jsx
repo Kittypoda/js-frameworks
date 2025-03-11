@@ -1,76 +1,65 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const API_URL = "https://v2.api.noroff.dev/online-shop";
-
-const HomePage = ({ addToCart }) => {
+function HomePage({ addToCart }) {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    async function fetchProducts() {
       try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-          throw new Error("Kunne ikke hente produkter.");
-        }
+        const response = await fetch("https://v2.api.noroff.dev/online-shop");
         const data = await response.json();
-        console.log("Hentede produkter:", data.data); 
         setProducts(data.data);
       } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+        console.error("Can't find product from API:", error);
       }
-    };
-
+    }
     fetchProducts();
   }, []);
 
-  if (loading) return <p className="text-center text-xl">Loads products...</p>;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
-
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center my-6">Produkter</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <h1 className="text-2xl font-bold mb-4">Produkter</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="border p-4 rounded-lg shadow-md bg-white">
+          <div key={product.id} className="border p-4 shadow-lg rounded-lg bg-white">
+            {/* 📌 Klikkbart bilde */}
             <Link to={`/product/${product.id}`}>
-              <img 
-                src={product.image.url} 
-                alt={product.image.alt} 
-                className="w-full h-40 object-cover rounded cursor-pointer"
-              />
+              <img src={product.image.url} alt={product.image.alt} className="w-full h-48 object-cover rounded-md" />
             </Link>
 
-            <h2 className="text-lg font-bold mt-2 hover:underline">
-              <Link to={`/product/${product.id}`}>{product.title}</Link>
-            </h2>
+            {/* 📌 Klikkbar tittel */}
+            <Link to={`/product/${product.id}`} className="block mt-2 text-lg font-semibold hover:text-blue-500">
+              {product.title}
+            </Link>
 
-            <p className="text-gray-600">{product.description}</p>
-            <p className="text-blue-500 font-bold">{product.discountedPrice} NOK</p>
-            
-            {product.price > product.discountedPrice && (
-              <p className="text-sm text-red-500">
-                Før: <span className="line-through">{product.price} NOK</span>
-              </p>
-            )}
+            {/* 📌 Pris & rabatt */}
+            <p className="text-gray-600">
+              {product.discountedPrice < product.price ? (
+                <>
+                  <span className="text-red-500 font-bold">{product.discountedPrice} kr</span>{" "}
+                  <span className="line-through text-gray-400">{product.price} kr</span>
+                </>
+              ) : (
+                <span>{product.price} kr</span>
+              )}
+            </p>
 
-            <button 
-              onClick={() => addToCart(product)} 
-              className="mt-4 w-full bg-green-500 text-white px-4 py-2 rounded transition hover:bg-green-600"
+            {/* 🛒 Quick Buy knapp */}
+            <button
+              onClick={() => addToCart(product)}
+              className="mt-3 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
             >
-              🛍️ Quick Buy
+              Legg i handlekurv
             </button>
           </div>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default HomePage;
+
 
 
