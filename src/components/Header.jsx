@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
 
-const Header = () => {
+function Header({ cart }) {
   return (
-    <header className="bg-blue-500 text-white p-4">
-      <nav className="flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold">LULU</Link>
-        <ul className="flex gap-4">
-          <li><Link to="/" className="hover:underline">Home</Link></li>
-          <li><Link to="/cart" className="hover:underline">Cart</Link></li>
-          <li><Link to="/contact" className="hover:underline">Contact</Link></li>
-        </ul>
+    <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
+      <Link to="/" className="text-2xl font-bold">LULU</Link>
+      
+      <nav className="flex gap-6">
+        <Link to="/cart" className="relative">
+          Cart
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+              {cart.length}
+            </span>
+          )}
+        </Link>
       </nav>
     </header>
   );
-};
+}
 
 export default Header;
+
