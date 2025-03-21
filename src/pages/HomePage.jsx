@@ -19,21 +19,16 @@ function HomePage({ addToCart }) {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Produkter</h1>
+      <h1 className="text-2xl font-bold mb-4">Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div key={product.id} className="border p-4 shadow-lg rounded-lg bg-white">
-            {/* 📌 Klikkbart bilde */}
             <Link to={`/product/${product.id}`}>
               <img src={product.image.url} alt={product.image.alt} className="w-full h-48 object-cover rounded-md" />
             </Link>
-
-            {/* 📌 Klikkbar tittel */}
             <Link to={`/product/${product.id}`} className="block mt-2 text-lg font-semibold hover:text-blue-500">
               {product.title}
             </Link>
-
-            {/* 📌 Pris & rabatt */}
             <p className="text-gray-600">
               {product.discountedPrice < product.price ? (
                 <>
@@ -44,13 +39,11 @@ function HomePage({ addToCart }) {
                 <span>{product.price} kr</span>
               )}
             </p>
-
-            {/* 🛒 Quick Buy knapp */}
             <button
               onClick={() => addToCart(product)}
               className="mt-3 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
             >
-              Legg i handlekurv
+              Add to cart
             </button>
           </div>
         ))}
