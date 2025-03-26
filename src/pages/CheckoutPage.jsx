@@ -1,18 +1,32 @@
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function CheckoutPage() {
   const { cart, clearCart } = useCart();
   const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    address: "",
+  });
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.discountedPrice,
     0
   );
 
-  function handleCheckout() {
-    clearCart(); 
-    navigate("/checkout-success"); 
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("Order placed!", formData, cart);
+    clearCart();
+    navigate("/checkout-success");
   }
 
   return (
@@ -23,7 +37,7 @@ function CheckoutPage() {
         <p>Cart is empty</p>
       ) : (
         <>
-          <ul className="divide-y">
+          <ul className="divide-y mb-6">
             {cart.map((item) => (
               <li key={item.id} className="py-2 flex justify-between">
                 <span>{item.title}</span>
@@ -32,16 +46,54 @@ function CheckoutPage() {
             ))}
           </ul>
 
-          <div className="mt-4 text-right font-semibold">
+          <div className="mb-6 text-right font-semibold">
             Total: {totalPrice.toFixed(2)} kr
           </div>
 
-          <button
-            onClick={handleCheckout}
-            className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Place order
-          </button>
+          <form onSubmit={handleSubmit} className="bg-gray-100 p-4 rounded space-y-4">
+            <div>
+              <label className="block font-medium">Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+
+            <div>
+              <label className="block font-medium">Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+
+            <div>
+              <label className="block font-medium">Address</label>
+              <input
+                type="text"
+                name="address"
+                required
+                value={formData.address}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Place order
+            </button>
+          </form>
         </>
       )}
     </div>
@@ -49,4 +101,5 @@ function CheckoutPage() {
 }
 
 export default CheckoutPage;
+
 
