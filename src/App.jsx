@@ -1,28 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import "./index.css";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CeckoutPage";
+import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutSuccessPage from "./pages/CheckoutSuccess";
 import ContactPage from "./pages/ContactPage";
+import { useCart } from "./context/CartContext";
 
 function App() {
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
-  };
-
-  const clearCart = () => {
-    setCart([]);
-  };
+  const { cart, addToCart, removeFromCart, clearCart } = useCart(); 
 
   return (
     <Router>
