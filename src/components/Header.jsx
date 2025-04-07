@@ -11,7 +11,7 @@ function Header({ cart }) {
 
     <nav className="flex gap-6">
       <Link to="/cart" className="relative">
-        <i className="fa-solid fa-shopping-cart text-red-800 text-2xl"></i>
+        <i className="fa-solid fa-bag-shopping text-red-800 text-2xl"></i>
         {cart.length > 0 && (
           <span className="absolute -top-2 -right-3 bg-red-800 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
             {cart.length}

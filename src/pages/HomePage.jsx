@@ -21,29 +21,37 @@ function HomePage({ addToCart }) {
     <div className="container mx-auto p-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="">
+          <div key={product.id} className="bg-white p-4 rounded transition">
             <Link to={`/product/${product.id}`}>
-              <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-md" />
+              <img
+                src={product.image.url}
+                alt={product.image.alt}
+                className="w-full h-80 object-cover rounded-md"
+              />
             </Link>
-            <Link to={`/product/${product.id}`} className="block mt-2 text-red-800">
-              {product.title}
-            </Link>
-            <p className="text-red-800 text-sm">
+
+            <div className="flex justify-between items-center mt-2">
+              <Link to={`/product/${product.id}`} className="text-red-800 font-gayathri">
+                {product.title}
+              </Link>
+              <button
+                onClick={() => addToCart(product)}
+                className="text-red-800 text-xl"
+              >
+                <i className="fa-solid fa-shopping-bag"></i>
+              </button>
+            </div>
+
+            <p className="text-red-800 font-gayathri text-sm mt-1">
               {product.discountedPrice < product.price ? (
                 <>
-                  <span className="text-red-800 text-sm">{product.discountedPrice} kr</span>{" "}
+                  <span className="text-red-800 font-medium">{product.discountedPrice} kr</span>{" "}
                   <span className="line-through text-red-800">{product.price} kr</span>
                 </>
               ) : (
                 <span>{product.price} kr</span>
               )}
             </p>
-            <button
-              onClick={() => addToCart(product)}
-              className="mt-3 w-full bg-red-800 text-white py-2 rounded-md"
-            >
-              Add to cart
-            </button>
           </div>
         ))}
       </div>
@@ -52,6 +60,7 @@ function HomePage({ addToCart }) {
 }
 
 export default HomePage;
+
 
 
 
