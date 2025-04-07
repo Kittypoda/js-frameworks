@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function HomePage({ addToCart }) {
   const [products, setProducts] = useState([]);
+  const [addedProductId, setAddedProductId] = useState(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -17,35 +18,44 @@ function HomePage({ addToCart }) {
     fetchProducts();
   }, []);
 
+  function handleAddToCart(product) {
+    addToCart(product);
+    setAddedProductId(product.id);
+
+    
+    setTimeout(() => setAddedProductId(null), 2000);
+  }
+
   return (
     <div className="container mx-auto p-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="bg-white p-4 rounded transition">
+          <div key={product.id} className="">
             <Link to={`/product/${product.id}`}>
-              <img
-                src={product.image.url}
-                alt={product.image.alt}
-                className="w-full h-80 object-cover rounded-md"
-              />
+              <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-md" />
             </Link>
 
             <div className="flex justify-between items-center mt-2">
               <Link to={`/product/${product.id}`} className="text-red-800 font-gayathri">
                 {product.title}
               </Link>
-              <button
-                onClick={() => addToCart(product)}
-                className="text-red-800 text-xl"
-              >
-                <i className="fa-solid fa-shopping-bag"></i>
-              </button>
+
+              {addedProductId === product.id ? (
+                <span className="text-red-800 text-sm font-medium">✓ Added to bag!</span>
+              ) : (
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="text-red-800 text-lg"
+                >
+                  <i className="fa-solid fa-shopping-bag"></i>
+                </button>
+              )}
             </div>
 
-            <p className="text-red-800 font-gayathri text-sm mt-1">
+            <p className="text-red-800 text-sm">
               {product.discountedPrice < product.price ? (
                 <>
-                  <span className="text-red-800 font-medium">{product.discountedPrice} kr</span>{" "}
+                  <span className="text-red-800 font-gayathri text-sm">{product.discountedPrice} kr</span>{" "}
                   <span className="line-through text-red-800">{product.price} kr</span>
                 </>
               ) : (
@@ -60,6 +70,7 @@ function HomePage({ addToCart }) {
 }
 
 export default HomePage;
+
 
 
 
