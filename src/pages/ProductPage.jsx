@@ -16,7 +16,7 @@ function ProductPage() {
         setProduct(data.data);
         setLoading(false);
       } catch (error) {
-        console.error("Feil ved henting av produkt:", error);
+        console.error("Product not found", error);
         setLoading(false);
       }
     }
@@ -24,8 +24,8 @@ function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <p className="p-6">Laster produkt...</p>;
-  if (!product) return <p className="p-6">Fant ikke produktet.</p>;
+  if (loading) return <p className="p-6">Product loading..</p>;
+  if (!product) return <p className="p-6">Product not found</p>;
 
   return (
     <div className="container mx-auto p-6">
@@ -42,11 +42,8 @@ function ProductPage() {
         <p className="text-gray-700 mt-4">
           {product.discountedPrice < product.price ? (
             <>
-              <span className="text-red-500 font-bold">{product.discountedPrice} kr</span>{" "}
+              <span className="text-black font-bold">{product.discountedPrice} kr</span>{" "}
               <span className="line-through text-gray-400">{product.price} kr</span>{" "}
-              <span className="text-sm text-green-600 font-medium">
-                (Spar {Math.round(((product.price - product.discountedPrice) / product.price) * 100)}%)
-              </span>
             </>
           ) : (
             <span>{product.price} kr</span>
@@ -55,7 +52,7 @@ function ProductPage() {
 
         <button
           onClick={() => addToCart(product)}
-          className="mt-4 w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition"
+          className="mt-4 w-full bg-orange-100 text-black py-3 rounded-md hover:bg-blue-600 transition"
         >
           Add to cart
         </button>

@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Gayathri:wght@100;400;700&family=Leckerli+One&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 0.5px #CF6D6D;
+  }
+  .text-stroke-white {
+    -webkit-text-stroke: 1px white;
+  }
+}
