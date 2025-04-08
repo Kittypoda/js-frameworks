@@ -29,7 +29,7 @@ function ContactPage() {
         <div className="text-red-800 font-inria  text-center">Send us a message <br></br> and we will get back to you as soon as possible</div>
 
         {submitted && (
-          <p className="text-green-700 text-sm text-center font-medium">Your message has been sent! ❤️</p>
+          <p className="text-red-800 text-sm text-center font-medium">Your message has been sent!</p>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
