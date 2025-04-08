@@ -32,16 +32,16 @@ function HomePage({ addToCart }) {
         {products.map((product) => (
           <div key={product.id} className="">
             <Link to={`/product/${product.id}`}>
-              <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-xl" />
+              <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-xl shadow-md" />
             </Link>
 
             <div className="flex justify-between items-center mt-2">
-              <Link to={`/product/${product.id}`} className="text-red-800 font-gayathri">
+              <Link to={`/product/${product.id}`} className="text-red-800 font-inria text-sm font-semibold">
                 {product.title}
               </Link>
 
               {addedProductId === product.id ? (
-                <span className="text-red-800 text-sm font-gayathri">Added to bag!</span>
+                <span className="text-red-800 text-sm font-inria">Added to bag!</span>
               ) : (
                 <button
                   onClick={() => handleAddToCart(product)}
@@ -52,11 +52,11 @@ function HomePage({ addToCart }) {
               )}
             </div>
 
-            <p className="text-red-800 text-sm">
+            <p className="text-red-800 font-inria font-thin text-sm">
               {product.discountedPrice < product.price ? (
                 <>
-                  <span className="text-red-800 font-gayathri text-sm">{product.discountedPrice} kr</span>{" "}
-                  <span className="line-through font-gayathri text-red-800">{product.price} kr</span>
+                  <span className="text-red-800 font-inria font-thin text-sm">{product.discountedPrice} kr</span>{" "}
+                  <span className="line-through font-inria font-thin  text-red-800">{product.price} kr</span>
                 </>
               ) : (
                 <span>{product.price} kr</span>

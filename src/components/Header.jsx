@@ -60,12 +60,12 @@ function Header({ cart }) {
             <input
               type="text"
               placeholder="Search products..."
-              className="border border-red-800 placeholder-red-800 font-gayathri text-sm rounded-2xl pl-9 px-4 py-2 pt-3 focus:outline-none w-full"
+              className="border border-red-800 placeholder-red-800 font-inria font-thin text-sm rounded-2xl pl-9 px-4 py-2 focus:outline-none w-full"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
             {results.length > 0 && (
-              <ul className="absolute left-0 right-0 bg-white shadow-lg border font-gayathri border-red-800 rounded-xl mt-1 z-10">
+              <ul className="absolute left-0 right-0 bg-white shadow-lg border font-inria border-red-800 rounded-xl mt-1 z-10">
                 {results.map((product) => (
                   <li key={product.id}>
                     <Link
@@ -84,7 +84,7 @@ function Header({ cart }) {
 
         {/* Right: search icon (mobile) + cart */}
         <div className="flex-1 flex justify-end items-center relative">
-          
+
           {/* Mobile search icon */}
           <button onClick={() => setShowMobileSearch(true)} className="md:hidden mr-4">
             <i className="fa fa-search text-red-800 text-xl" />
@@ -104,9 +104,9 @@ function Header({ cart }) {
 
       {/* Mobile search overlay */}
       {showMobileSearch && (
-        <div className="fixed inset-0 bg-white z-50 p-4 flex flex-col">
+        <div className="fixed inset-0 bg-red-100 z-50 p-4 flex flex-col">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-Gayathri text-red-800">Search</h2>
+            <h2 className="text-md font-semibold font-inria text-red-800">Search</h2>
             <button onClick={() => setShowMobileSearch(false)} className="text-red-800 text-xl">
               &times;
             </button>
@@ -115,14 +115,14 @@ function Header({ cart }) {
           <input
             type="text"
             placeholder="Search products..."
-            className="border border-red-800 placeholder-red-800 font-gayathri text-sm rounded-xl px-4 py-2 pt-2 focus:outline-none"
+            className="border border-red-800 placeholder-red-800 font-inria font-thin text-sm rounded-xl px-4 py-2 pt-2 focus:outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
           />
 
           {results.length > 0 && (
-            <ul className="mt-2 border border-red-800 rounded-xl">
+            <ul className="mt-2 border bg-white border-red-800 rounded-xl">
               {results.map((product) => (
                 <li key={product.id}>
                   <Link

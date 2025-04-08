@@ -5,6 +5,8 @@ export default {
       fontFamily: {
         leckerli: ['"Leckerli One"', 'cursive'],
         gayathri: ['"Gayathri"', 'sans-serif'],
+        inria: ['"Inria Sans"', 'sans-serif'],
+        
       },
     },
   },

@@ -24,8 +24,8 @@ function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <p className="p-6 text-red-800 font-gayathri">Product loading..</p>;
-  if (!product) return <p className="p-6 text-red-800 font-gayathri">Product not found</p>;
+  if (loading) return <p className="p-6 text-red-800 text-sm font-inria">Product loading..</p>;
+  if (!product) return <p className="p-6 text-red-800 text-sm font-inria">Product not found</p>;
 
   return (
     <div className="container mx-auto p-6">
@@ -36,13 +36,13 @@ function ProductPage() {
           className="w-full max-h-80 shadow-md object-cover rounded-xl"
         />
 
-        <h1 className="text-xl text-red-800 font-gayathri mt-4">{product.title}</h1>
-        <p className="text-red-800 font-gayathri mt-2">{product.description}</p>
+        <h1 className="text-md text-red-800 font-inria font-thin mt-4">{product.title}</h1>
+        <p className="text-red-800 font-inria text-sm mt-2">{product.description}</p>
 
-        <p className="text-red-800 font-gayathri mt-4">
+        <p className="text-red-800 font-inria font-thin mt-4">
           {product.discountedPrice < product.price ? (
             <>
-              <span className="text-red-800 font-gayathri">{product.discountedPrice} kr</span>{" "}
+              <span className="text-red-800 font-inria font-thin">{product.discountedPrice} kr</span>{" "}
               <span className="line-through text-red-800 font-gayathri">{product.price} kr</span>{" "}
             </>
           ) : (
@@ -52,20 +52,20 @@ function ProductPage() {
 
         <button
           onClick={() => addToCart(product)}
-          className="mt-4 w-full bg-red-800 text-white text-red-800 font-gayathri py-3 rounded-xl transition"
+          className="mt-4 w-full bg-red-800 text-white text-red-800 font-inria py-3 rounded-xl transition"
         >
           Add to bag
         </button>
 
         {product.reviews?.length > 0 && (
           <div className="mt-6">
-            <h2 className="text-red-800 font-gayathri mb-2">Reviews</h2>
+            <h2 className="text-red-800 font-inria font-thin mb-2">Reviews</h2>
             <ul className="space-y-4">
               {product.reviews.map((review) => (
                 <li key={review.id} className="bg-red-100 p-3 rounded-xl">
-                  <p className="text-red-800 font-bold font-gayathri">{review.username}</p>
-                  <p className="text-sm text-red-800">Rating: {review.rating}/5</p>
-                  <p className="text-red-800 mt-1 font-gayathri">{review.description}</p>
+                  <p className="text-red-800 font-bold font-inria font-thin">{review.username}</p>
+                  <p className="text-sm text-red-800 font-inria ">Rating: {review.rating}/5</p>
+                  <p className="text-red-800 mt-1 font-inria text-sm">{review.description}</p>
                 </li>
               ))}
             </ul>
