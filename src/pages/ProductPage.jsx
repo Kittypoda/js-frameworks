@@ -24,26 +24,26 @@ function ProductPage() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <p className="p-6">Product loading..</p>;
-  if (!product) return <p className="p-6">Product not found</p>;
+  if (loading) return <p className="p-6 text-red-800 font-gayathri">Product loading..</p>;
+  if (!product) return <p className="p-6 text-red-800 font-gayathri">Product not found</p>;
 
   return (
     <div className="container mx-auto p-6">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
+      <div className="max-w-3xl mx-auto p-6">
         <img
           src={product.image.url}
           alt={product.image.alt}
-          className="w-full h-64 object-cover rounded-md"
+          className="w-full max-h-80 shadow-md object-cover rounded-xl"
         />
 
-        <h1 className="text-2xl font-bold mt-4">{product.title}</h1>
-        <p className="text-gray-600 mt-2">{product.description}</p>
+        <h1 className="text-xl text-red-800 font-gayathri mt-4">{product.title}</h1>
+        <p className="text-red-800 font-gayathri mt-2">{product.description}</p>
 
-        <p className="text-gray-700 mt-4">
+        <p className="text-red-800 font-gayathri mt-4">
           {product.discountedPrice < product.price ? (
             <>
-              <span className="text-black font-bold">{product.discountedPrice} kr</span>{" "}
-              <span className="line-through text-gray-400">{product.price} kr</span>{" "}
+              <span className="text-red-800 font-gayathri">{product.discountedPrice} kr</span>{" "}
+              <span className="line-through text-red-800 font-gayathri">{product.price} kr</span>{" "}
             </>
           ) : (
             <span>{product.price} kr</span>
@@ -52,20 +52,20 @@ function ProductPage() {
 
         <button
           onClick={() => addToCart(product)}
-          className="mt-4 w-full bg-orange-100 text-black py-3 rounded-md hover:bg-blue-600 transition"
+          className="mt-4 w-full bg-red-800 text-white text-red-800 font-gayathri py-3 rounded-xl transition"
         >
-          Add to cart
+          Add to bag
         </button>
 
         {product.reviews?.length > 0 && (
           <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-2">Reviews</h2>
+            <h2 className="text-red-800 font-gayathri mb-2">Reviews</h2>
             <ul className="space-y-4">
               {product.reviews.map((review) => (
-                <li key={review.id} className="bg-gray-100 p-3 rounded-md">
-                  <p className="font-semibold">{review.username}</p>
-                  <p className="text-sm text-yellow-500">Rating: {review.rating}/5</p>
-                  <p className="mt-1">{review.description}</p>
+                <li key={review.id} className="bg-red-100 p-3 rounded-xl">
+                  <p className="text-red-800 font-bold font-gayathri">{review.username}</p>
+                  <p className="text-sm text-red-800">Rating: {review.rating}/5</p>
+                  <p className="text-red-800 mt-1 font-gayathri">{review.description}</p>
                 </li>
               ))}
             </ul>
