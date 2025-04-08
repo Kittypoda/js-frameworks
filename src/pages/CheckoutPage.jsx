@@ -51,6 +51,7 @@ function CheckoutPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="bg-red-100 p-6 rounded-lg shadow-md space-y-4">
+            <div className="text-red-800 font-inria font-semibold text-center">Shipping details</div>
             <div>
               <label className="block text-red-800 font-inria">Name</label>
               <input
