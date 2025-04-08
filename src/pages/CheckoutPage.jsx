@@ -31,65 +31,65 @@ function CheckoutPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Checkout</h1>
+      <h1 className="text-lg text-red-800 font-inria font-thin mb-4">Checkout</h1>
 
       {cart.length === 0 ? (
         <p>Cart is empty</p>
       ) : (
         <>
-          <ul className="divide-y mb-6">
+          <ul className="divide-y divide-red-100  mb-6">
             {cart.map((item) => (
               <li key={item.id} className="py-2 flex justify-between">
-                <span>{item.title}</span>
-                <span>{item.discountedPrice} kr</span>
+                <span className="text-md text-red-800 font-inria">{item.title}</span>
+                <span className="text-md text-red-800 font-inria">{item.discountedPrice} kr</span>
               </li>
             ))}
           </ul>
 
-          <div className="mb-6 text-right font-semibold">
+          <div className="mb-6 text-right text-lg text-red-800 font-inria font-semibold">
             Total: {totalPrice.toFixed(2)} kr
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-gray-100 p-4 rounded space-y-4">
+          <form onSubmit={handleSubmit} className="bg-red-100 p-6 rounded-lg shadow-md space-y-4">
             <div>
-              <label className="block font-medium">Name</label>
+              <label className="block text-red-800 font-inria">Name</label>
               <input
                 type="text"
                 name="name"
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-red-800 rounded-lg"
               />
             </div>
 
             <div>
-              <label className="block font-medium">Email</label>
+              <label className="block text-red-800 font-inria">Email</label>
               <input
                 type="email"
                 name="email"
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-red-800 rounded-lg"
               />
             </div>
 
             <div>
-              <label className="block font-medium">Address</label>
+            <label className="block text-red-800 font-inria">Address</label>
               <input
                 type="text"
                 name="address"
                 required
                 value={formData.address}
                 onChange={handleChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-red-800 rounded-lg"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="w-full mt-4 px-4 py-2 bg-red-800 text-white rounded-lg"
             >
               Place order
             </button>
