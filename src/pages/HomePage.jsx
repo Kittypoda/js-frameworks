@@ -32,7 +32,7 @@ function HomePage({ addToCart }) {
         {products.map((product) => (
           <div key={product.id} className="">
             <Link to={`/product/${product.id}`}>
-              <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-md" />
+              <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-xl" />
             </Link>
 
             <div className="flex justify-between items-center mt-2">
@@ -41,7 +41,7 @@ function HomePage({ addToCart }) {
               </Link>
 
               {addedProductId === product.id ? (
-                <span className="text-red-800 text-sm font-medium">✓ Added to bag!</span>
+                <span className="text-red-800 text-sm font-gayathri">Added to bag!</span>
               ) : (
                 <button
                   onClick={() => handleAddToCart(product)}
@@ -56,7 +56,7 @@ function HomePage({ addToCart }) {
               {product.discountedPrice < product.price ? (
                 <>
                   <span className="text-red-800 font-gayathri text-sm">{product.discountedPrice} kr</span>{" "}
-                  <span className="line-through text-red-800">{product.price} kr</span>
+                  <span className="line-through font-gayathri text-red-800">{product.price} kr</span>
                 </>
               ) : (
                 <span>{product.price} kr</span>
