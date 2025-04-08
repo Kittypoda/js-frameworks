@@ -127,7 +127,7 @@ function Header({ cart }) {
                 <li key={product.id}>
                   <Link
                     to={`/product/${product.id}`}
-                    className="block px-4 py-2 hover:bg-red-100 text-sm"
+                    className="block px-4 py-2 text-sm"
                     onClick={() => {
                       setQuery("");
                       setShowMobileSearch(false);

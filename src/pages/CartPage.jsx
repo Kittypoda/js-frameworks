@@ -11,16 +11,16 @@ function CartPage() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Your cart</h1>
+      <h1 className="text-lg text-red-800 font-inria font-thin mb-4">Your cart</h1>
 
       {cart.length === 0 ? (
-        <p className="text-gray-600">Cart is empty</p>
+        <p className="text-red-800 font-inria">Cart is empty</p>
       ) : (
         <>
           {cart.map((product, index) => (
             <div
               key={index}
-              className="flex items-center justify-between border-b py-4"
+              className="flex items-center justify-between border-b border-red-100 py-4"
             >
               <div className="flex items-center gap-4">
                 <img
@@ -29,13 +29,13 @@ function CartPage() {
                   className="w-16 h-16 object-cover rounded-md"
                 />
                 <div>
-                  <h2 className="text-lg font-semibold">{product.title}</h2>
-                  <p className="text-gray-700">{product.discountedPrice} kr</p>
+                  <h2 className="text-md text-red-800 font-semibold font-inria">{product.title}</h2>
+                  <p className="text-red-800 font-inria font-thin">{product.discountedPrice} kr</p>
                 </div>
               </div>
               <button
                 onClick={() => removeFromCart(product.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition"
+                className="text-red-800 font-inria"
               >
                 Remove
               </button>
@@ -43,7 +43,7 @@ function CartPage() {
           ))}
 
           <div className="mt-6">
-            <h2 className="text-xl font-bold">
+            <h2 className="text-xl text-red-800 font-inria font-bold">
               Total: {totalPrice.toFixed(2)} kr
             </h2>
           </div>
@@ -51,13 +51,13 @@ function CartPage() {
           <div className="flex gap-4 mt-4">
             <button
               onClick={clearCart}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
+              className="bg-red-100 text-red-900 px-4 py-2 rounded-lg"
             >
               Empty cart
             </button>
             <Link
               to="/checkout"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+              className="bg-red-800 text-white px-4 py-2 rounded-lg"
             >
               Checkout
             </Link>
