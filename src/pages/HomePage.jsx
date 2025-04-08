@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 function HomePage({ addToCart }) {
   const [products, setProducts] = useState([]);
-  const [addedProductId, setAddedProductId] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+  const [toastProduct, setToastProduct] = useState(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -20,17 +21,20 @@ function HomePage({ addToCart }) {
 
   function handleAddToCart(product) {
     addToCart(product);
-    setAddedProductId(product.id);
+    setToastProduct(product);
+    setShowToast(true);
 
-    
-    setTimeout(() => setAddedProductId(null), 2000);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastProduct(null);
+    }, 2000);
   }
 
   return (
     <div className="container mx-auto p-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="">
+          <div key={product.id}>
             <Link to={`/product/${product.id}`}>
               <img src={product.image.url} alt={product.image.alt} className="w-full h-80 object-cover rounded-xl shadow-md" />
             </Link>
@@ -40,23 +44,19 @@ function HomePage({ addToCart }) {
                 {product.title}
               </Link>
 
-              {addedProductId === product.id ? (
-                <span className="text-red-800 text-sm font-inria">Added to bag!</span>
-              ) : (
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className="text-red-800 text-lg"
-                >
-                  <i className="fa-solid fa-shopping-bag"></i>
-                </button>
-              )}
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="text-red-800 text-lg"
+              >
+                <i className="fa-solid fa-shopping-bag"></i>
+              </button>
             </div>
 
             <p className="text-red-800 font-inria font-thin text-sm">
               {product.discountedPrice < product.price ? (
                 <>
-                  <span className="text-red-800 font-inria font-thin text-sm">{product.discountedPrice} kr</span>{" "}
-                  <span className="line-through font-inria font-thin  text-red-800">{product.price} kr</span>
+                  <span>{product.discountedPrice} kr</span>{" "}
+                  <span className="line-through">{product.price} kr</span>
                 </>
               ) : (
                 <span>{product.price} kr</span>
@@ -65,11 +65,20 @@ function HomePage({ addToCart }) {
           </div>
         ))}
       </div>
+
+      {/* Toast Notification */}
+      {showToast && toastProduct && (
+        <div className="fixed bottom-4 right-4 bg-red-800 text-white text-sm px-4 py-3 rounded-lg shadow-md animate-fade-in-out z-50">
+          <i className="fa-solid fa-check mr-2" />
+          <span className="font-inria">Added <strong>{toastProduct.title}</strong> to cart!</span>
+        </div>
+      )}
     </div>
   );
 }
 
 export default HomePage;
+
 
 
 
